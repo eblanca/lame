@@ -186,10 +186,12 @@ apply_vbr_preset(lame_global_flags * gfp, int a, int enforce)
         SET_OPTION(interChRatio, set->interch, -1);
     }
 
+#ifndef _ALLOW_INTERNAL_OPTIONS
     /* parameters for which there is no proper set/get interface */
-    if (set->safejoint > 0) {
+    if (set->safejoint > 0 && lame_get_mode(gfp) == JOINT_STEREO) {
         (void) lame_set_exp_nspsytune(gfp, lame_get_exp_nspsytune(gfp) | 2);
     }
+#endif
     if (set->sfb21mod > 0) {
         int const nsp = lame_get_exp_nspsytune(gfp);
         int const val = (nsp >> 20) & 63;
@@ -272,11 +274,11 @@ apply_abr_preset(lame_global_flags * gfp, int preset, int enforce)
     (void) lame_set_VBR_mean_bitrate_kbps(gfp, max_int(lame_get_VBR_mean_bitrate_kbps(gfp), 8));
     (void) lame_set_brate(gfp, lame_get_VBR_mean_bitrate_kbps(gfp));
 
-
+#ifndef _ALLOW_INTERNAL_OPTIONS
     /* parameters for which there is no proper set/get interface */
-    if (abr_switch_map[r].safejoint > 0)
+    if (abr_switch_map[r].safejoint > 0 && lame_get_mode(gfp) == JOINT_STEREO)
         (void) lame_set_exp_nspsytune(gfp, lame_get_exp_nspsytune(gfp) | 2); /* safejoint */
-
+#endif
     if (abr_switch_map[r].sfscale > 0)
         (void) lame_set_sfscale(gfp, 1);
 
