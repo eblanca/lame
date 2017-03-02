@@ -596,6 +596,9 @@ int CDECL lame_get_size_mp3buffer( const lame_global_flags*  gfp );
 /* number of frames encoded so far */
 int CDECL lame_get_frameNum(const lame_global_flags *);
 
+/* bytes encoded so far */
+unsigned long CDECL lame_get_encoded_bytes(const lame_global_flags *);
+
 /*
   lame's estimate of the total number of frames to be encoded
    only valid if calling program set num_samples

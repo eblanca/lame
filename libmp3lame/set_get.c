@@ -2026,6 +2026,19 @@ lame_get_frameNum(const lame_global_flags * gfp)
     return 0;
 }
 
+/* Bytes encoded so far. */
+unsigned long
+lame_get_encoded_bytes(const lame_global_flags * gfp)
+{
+    if (is_lame_global_flags_valid(gfp)) {
+        lame_internal_flags const *const gfc = gfp->internal_flags;
+        if (is_lame_internal_flags_valid(gfc)) {
+            return gfc->VBR_seek_table.nBytesWritten;
+        }
+    }
+    return 0;
+}
+
 int
 lame_get_mf_samples_to_encode(const lame_global_flags * gfp)
 {

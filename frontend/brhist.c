@@ -325,7 +325,8 @@ brhist_disp(const lame_global_flags * gf)
     frames = most_often = 0;
     for (i = 0; i < BRHIST_WIDTH; i++) {
         frames += br_hist[i];
-        sum += br_hist[i] * brhist.kbps[i];
+        /* change `sum' in order to show more accurate bitrate calculation */
+        sum = (double)lame_get_encoded_bytes(gf) * 0.008 * (double)lame_get_out_samplerate(gf) / (double)lame_get_framesize(gf);
         if (most_often < br_hist[i])
             most_often = br_hist[i];
         if (br_hist[i])
