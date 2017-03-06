@@ -2515,10 +2515,6 @@ parse_args_(lame_global_flags * gfp, int argc, char **argv,
             return -1;
         }
     }
-    if (lame_get_mode(gfp) != JOINT_STEREO) {
-        /* ensure safejoint is not enabled, even when user set it */
-        (void) lame_set_exp_nspsytune(gfp, lame_get_exp_nspsytune(gfp) & ~2);
-    }
     if (num_nogap != NULL)
         *num_nogap = count_nogap;
     return 0;

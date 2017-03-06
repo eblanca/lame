@@ -852,6 +852,10 @@ lame_init_params(lame_global_flags * gfp)
     if (gfp->mode == NOT_SET) {
         gfp->mode = JOINT_STEREO;
     }
+    if (gfp->mode != JOINT_STEREO) {
+        /* ensure safejoint is not enabled */
+        gfp->exp_nspsytune &= ~2;
+    }
 
     cfg->mode = gfp->mode;
 
