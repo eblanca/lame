@@ -541,6 +541,7 @@ extern  "C" {
         lame_report_function report_msg;
         lame_report_function report_dbg;
         lame_report_function report_err;
+        int     padding_type;    /* PAD_NO, PAD_ALL, PAD_ADJUST [default] */
     };
 
 #ifndef lame_internal_flags_defined

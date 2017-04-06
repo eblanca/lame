@@ -346,7 +346,7 @@ lame_encode_mp3_frame(       /* Output */
      * Robert Hegemann 2000-06-22
      */
     gfc->ov_enc.padding = FALSE;
-    if ((gfc->sv_enc.slot_lag -= gfc->sv_enc.frac_SpF) < 0) {
+    if ((gfc->sv_enc.slot_lag -= gfc->sv_enc.frac_SpF) < 0 && gfc->padding_type != PAD_NO) {
         gfc->sv_enc.slot_lag += cfg->samplerate_out;
         gfc->ov_enc.padding = TRUE;
     }

@@ -2307,6 +2307,8 @@ lame_init_internal_flags(lame_internal_flags* gfc)
     gfc->ov_rpg.noclipGainChange = 0;
     gfc->ov_rpg.noclipScale = -1.0;
 
+    gfc->padding_type = PAD_ADJUST;
+
     gfc->ATH = lame_calloc(ATH_t, 1);
     if (NULL == gfc->ATH)
         return -2;      /* maybe error codes should be enumerated in lame.h ?? */

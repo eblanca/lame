@@ -806,6 +806,7 @@ long_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramNam
             "    -o              mark as non-original\n"
             "    -p              error protection.  adds 16 bit checksum to every frame\n"
             "                    (the checksum is computed correctly)\n"
+            "    -d              disable padding\n"
             "    --nores         disable the bit reservoir\n"
             "    --strictly-enforce-ISO   comply as much as possible to ISO MPEG spec\n");
     fprintf(fp,
@@ -2327,7 +2328,7 @@ parse_args_(lame_global_flags * gfp, int argc, char **argv,
                         autoconvert = 1;
                         (void) lame_set_mode(gfp, MONO);
                         break;
-                    case 'd':   /*(void) lame_set_allow_diff_short( gfp, 1 ); */
+                    //case 'd':   /*(void) lame_set_allow_diff_short( gfp, 1 ); */
                     case 'k':   /*lame_set_lowpassfreq(gfp, -1);
                                   lame_set_highpassfreq(gfp, -1); */
                         error_printf("WARNING: -%c is obsolete.\n", c);
@@ -2392,6 +2393,9 @@ parse_args_(lame_global_flags * gfp, int argc, char **argv,
                         break;
                     case 'o':
                         lame_set_original(gfp, 0);
+                        break;
+                    case 'd':
+                        lame_set_padding_type(gfp, PAD_NO);
                         break;
 
                     case '?':

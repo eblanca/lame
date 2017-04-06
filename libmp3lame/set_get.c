@@ -840,7 +840,7 @@ lame_get_error_protection(const lame_global_flags * gfp)
 }
 
 
-#if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
+#if (DEPRECATED_OR_OBSOLETE_CODE_REMOVED && 0)
 /* padding_type. 0=pad no frames  1=pad all frames 2=adjust padding(default) */
 int CDECL lame_set_padding_type(lame_global_flags *, Padding_type);
 Padding_type CDECL lame_get_padding_type(const lame_global_flags *);
@@ -856,16 +856,21 @@ Padding_type CDECL lame_get_padding_type(const lame_global_flags *);
 int
 lame_set_padding_type(lame_global_flags * gfp, Padding_type padding_type)
 {
-    (void) gfp;
-    (void) padding_type;
+    lame_internal_flags *ifp=gfp->internal_flags;
+
+    if (padding_type)
+        ifp->padding_type = PAD_ADJUST;
+    else
+        ifp->padding_type = PAD_NO;
     return 0;
 }
 
 Padding_type
 lame_get_padding_type(const lame_global_flags * gfp)
 {
-    (void) gfp;
-    return PAD_ADJUST;
+    lame_internal_flags *ifp=gfp->internal_flags;
+
+    return (Padding_type)ifp->padding_type;
 }
 
 
